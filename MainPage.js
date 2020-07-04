@@ -6,63 +6,58 @@ import {
   View,
   TouchableOpacity,
   Text,
-  StatusBar,
+  FlatList,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import Activity from './Activity'  
 import Newact from './Newact'   
 
 const MainPage = () => {
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState( [
+    {key: 1, title: "Activity", seconds: "0", minutes: "0", hours: "0"},
+    {key: 2, title: "Activ3ity", seconds: "0", minutes: "0", hours: "0"},
+    {key: 3, title: "Activ3i3ty", seconds: "0", minutes: "0", hours: "0"}
+  ]);
     return(
         <View style={styles.mainView} >
-            <View style={styles.column}>
-              <View>{activities.map((activity) => (
-                      <View>{activity} </View>
-              ))}</View>
-            <TouchableOpacity style={styles.center} onPress= {() => setActivities({
-                newState:[...activities.newState, "<Activity title='hello' />"]
-              })}>
-                  <Newact title="Work" />
-              </TouchableOpacity>
-                </View>
-             <View style={styles.column}>
-             
-                </View>
+
+
+          <View style={styles.flatList}>
+              <FlatList
+                data={activities}
+                renderItem={({ item }) => (
+                  <View >
+                    <Activity title={item.title} seconds={item.seconds} minutes={item.minutes} hours={item.hours} />
+                    </View>
+                )}
+                //Setting the number of column
+                numColumns={2}
+              />
+            </View>
+
+
+            <View style={styles.addButtom} >
+               <Newact />
+            </View>
         </View>
     ); 
 }
 
+
 const styles = StyleSheet.create({
     mainView: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor:"#DEC5EA"
-
-    },
-    column: {
-        flex: 5,
-    },
-  circle: {
-      width: 200,
-      height: 200,
-      borderRadius: 200/2,
-      backgroundColor:"red"
-    },
-    center: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    Activity:{
+      flexDirection: 'column',
+      backgroundColor:"#DEC5EA"
 
+    },
+    flatList: {
+        flex: 1
+    },
+    addButtom:{
+      position: 'absolute',
+      bottom:10,
+      right:10
     }
   });
   

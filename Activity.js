@@ -9,13 +9,6 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import Stopwatch from './StopWatch'
 
 const Activity = (props) => {
@@ -27,7 +20,7 @@ const Activity = (props) => {
                     <View style={styles.center}>
                     <Text style={styles.fontFormat1}>{props.title}</Text>
                     <Text style={styles.fontFormat2}>Start</Text>
-                    <Stopwatch />
+                  
                     </View>
                 </TouchableOpacity>
             </View>
@@ -40,8 +33,8 @@ const Activity = (props) => {
 const styles = StyleSheet.create({
     container: {
       flex:1,
-      marginVertical: 5,
-      marginHorizontal: 25,
+      marginVertical: 10,
+      marginHorizontal: 28,
       
     },
     circle: {

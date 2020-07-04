@@ -1,17 +1,23 @@
 import React from 'react';
 import {
     StyleSheet,
+    TextInput,
   View,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 const Newact = (props) => {
     return(
-        <View style={styles.container} >
-            <View style={styles.circle} >
-                    <View style={styles.center}>
+        <View>
+            <View style={styles.button} >
+            <TouchableOpacity  style={styles.center} onPress= {() =>{
+                <TextInput
+                editable={false}
+                placeholder="Please enter your text" />
+            }}>
                     <Text style={styles.plusSign}>+</Text>
-                    </View>
+                    </TouchableOpacity>
             </View>
         </View>
     );
@@ -20,28 +26,22 @@ const Newact = (props) => {
  
 
 const styles = StyleSheet.create({
-    container: {
-      flex:1,
-      marginVertical: 5,
-      marginHorizontal: 25,
-      
-    },
-    circle: {
-        width: 150,
-        height: 150,
-        borderRadius: 150/2,
-        backgroundColor:"#DEC5EA",
-        borderColor: '#CD91E8',
-        borderWidth: 5
+  button: {
+        width: 75,
+        height: 75,
+        borderRadius: 75/2,
+        backgroundColor:"purple",
+        borderColor: 'white',
+        borderWidth: 2
      },
       center: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
       },
       plusSign:{
-        fontSize: 120,
-        marginBottom: 15 // TEMPORARY
+        fontSize: 60,
+        marginBottom: 20, // TEMPORARY
+        color: 'white'
       }
   });
   
