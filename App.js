@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   SafeAreaView,
+  
   StyleSheet,
   ScrollView,
   View,
@@ -19,14 +20,15 @@ import Activity from './Activity'
 import MainPage from './MainPage'   
 
 
+
 const App: () => React$Node = () => {
   return (
-  <View style={styles.body}> 
-    <View style={styles.mainMenu}> 
-      </View>
-    <View style={styles.page}> 
-          <MainPage />
-      </View>
+  <View style={styles.body}>  
+          <View style={styles.mainMenu}> 
+            </View>
+          <View style={styles.page}> 
+                <MainPage />
+            </View>
   </View>
   );
 };

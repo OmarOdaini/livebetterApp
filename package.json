@@ -12,6 +12,8 @@
   "dependencies": {
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-dialog-input": "^1.0.7",
+    "react-native-prompt-android": "^1.1.0",
     "react-native-stopwatch-timer": "0.0.21",
     "react-stopwatch": "^2.0.4"
   },

@@ -1,28 +1,25 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import {
     StyleSheet,
-    TextInput,
-  View,
-  Text,
-  TouchableOpacity
+    View,
+    Text,
+    TouchableOpacity
 } from 'react-native';
+import InputPrompt from './InputPrompt' 
 
-const Newact = (props) => {
+const Newact = props => {
+
+  const [prompt, setPrompt] = useState(false);
+
     return(
-        <View>
             <View style={styles.button} >
-            <TouchableOpacity  style={styles.center} onPress= {() =>{
-                <TextInput
-                editable={false}
-                placeholder="Please enter your text" />
-            }}>
+            <TouchableOpacity  style={styles.center} onPress={() => setPrompt(true)}>
                     <Text style={styles.plusSign}>+</Text>
                     </TouchableOpacity>
+                   {prompt ? <InputPrompt setPrompt={setPrompt}  activities={props.activities} setActivities={props.setActivities}/>  : null}
             </View>
-        </View>
     );
 }
-
  
 
 const styles = StyleSheet.create({
@@ -30,8 +27,8 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 75/2,
-        backgroundColor:"purple",
-        borderColor: 'white',
+        backgroundColor:"green",
+        borderColor: 'black',
         borderWidth: 2
      },
       center: {
@@ -41,10 +38,13 @@ const styles = StyleSheet.create({
       plusSign:{
         fontSize: 60,
         marginBottom: 20, // TEMPORARY
-        color: 'white'
+        color: 'black'
+      },
+      Dialog:{
+        flex: 1
       }
   });
   
 
-export default Newact;
+export default Newact
 
