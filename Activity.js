@@ -12,15 +12,15 @@ import {
 import Stopwatch from './StopWatch'
 
 const Activity = (props) => {
-    const [start, setStart] = useState(false)
-    return(
-        <View style={styles.container} >
-            <View style={styles.circle} >
-            <TouchableOpacity  style={styles.center}>
+  const [run, setRun] = useState(false)
+  return(
+        <View style={styles.container}>
+            <View style={styles.circle}>
+            <TouchableOpacity  style={styles.center} onPress={() => {setRun(!run)}}>
                     <View style={styles.center}>
                     <Text style={styles.fontFormat1}>{props.title}</Text>
                     <Text style={styles.fontFormat2}>Start</Text>
-                    <Stopwatch />
+                    <Stopwatch run={run} />
                     </View>
                 </TouchableOpacity>
             </View>
