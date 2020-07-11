@@ -38,7 +38,6 @@ const MainPage = () => {
     console.log()
     return(
         <View style={styles.mainView} >
-
           <View style={styles.flatList}>
               <FlatList
                 data={activities}

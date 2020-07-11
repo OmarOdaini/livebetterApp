@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         width: 140,
         height: 140,
         borderRadius: 140/2,
-        backgroundColor:"#00ffff"
+        backgroundColor:"#D399EA"
      },
       center: {
         justifyContent: 'center',
@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',  // makes the button independent from others
         borderColor: 'white',
-        borderWidth: 5,
+        borderWidth: 4,
         backgroundColor:"red",
-        left:125,
+        left:115,
         width: 45,
         height: 45,
         borderRadius: 45/2,
-        zIndex: 1
+        zIndex: 1     // fromt of screen
       },
       textInDelete:{
         color: 'black',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
       },
       touchInDeleteButton:{
-        flex:1
+        // flex:1
       }
   })
   
