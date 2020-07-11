@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text,
   FlatList,
-} from 'react-native';
+} from 'react-native'
 
  import Activity from './Activity'  
 import Newact from './Newact'   
@@ -18,7 +18,7 @@ import realm from './activitySchema'
 
 
 const MainPage = () => {
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState([])
 
 
   useEffect(() => {
@@ -44,9 +44,11 @@ const MainPage = () => {
                 data={activities}
                 keyExtractor={(item) => item.title}
                 renderItem={({ item }) => ( 
+                  item.isDeleted == false ?     // data still exist but not rendered 
                    <View >
-                       <Activity title={item.title} seconds={'0'} minutes={'0'} hours={'0'}/>
+                       <Activity title={item.title} seconds={item.seconds} minutes={item.minutes} hours={item.hours}/>
                      </View>
+                     : null
                 )}
                 numColumns={2}
               />
@@ -56,7 +58,7 @@ const MainPage = () => {
                <Newact activities={activities} setActivities={setActivities}/>
             </View>
         </View>
-    ); 
+    ) 
 }
 
 
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
       bottom:10,
       right:10
     }
-  });
+  })
   
 
-export default MainPage;
+export default MainPage

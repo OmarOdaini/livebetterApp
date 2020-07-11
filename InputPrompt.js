@@ -11,9 +11,7 @@ const InputPrompt = props => {
                     submitText={"Add"}
                     hintInput ={"Enter activity name....."}
                     submitInput={ (inputText) => {
-                        insertActivity({title: inputText}).then().catch((error) =>{
-                            console.log('Error inserting object: ', error)
-                        })
+                        insertActivity({title: inputText}).then().catch((error) => {console.log(error) })
                         props.setPrompt(false)  
                         }
                     }

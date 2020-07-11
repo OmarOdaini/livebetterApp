@@ -1,16 +1,21 @@
 import React, { useEffect, useState, useRef }  from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-
+import {updateActivity} from './activitySchema'
 
 const Stopwatch = props => {
-    const [timeArray, setTime] = useState([0,0,0])
+    const [timeArray, setTime] = useState([props.seconds,props.minutes,props.hours])
 
     useInterval(()=> {
         if(props.run)
             setTime(val => [...time(val)])
     }, 1000)
 
-    return(
+    useEffect(() => {
+        if(!props.run)
+            updateActivity({title: 'test', seconds: timeArray[0], minutes:  timeArray[1], hours: timeArray[2]}).then().catch((error) =>{ console.log(error)  })
+    },[props.run] )
+    
+     return(
         <View>
              <Text style={styles.stopwatch}>{("0" + timeArray[2]).slice(-2)}:{("0" + timeArray[1]).slice(-2)}:{("0" + timeArray[0]).slice(-2)}</Text> 
         </View>
