@@ -1,16 +1,9 @@
-import React, { useState, createContext } from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-    TouchableOpacity
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import InputPrompt from './InputPrompt' 
 
 const Newact = props => {
-
   const [prompt, setPrompt] = useState(false);
-
     return(
             <View style={styles.button} >
             <TouchableOpacity  style={styles.center} onPress={() => setPrompt(true)}>
@@ -27,7 +20,7 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 75/2,
-        backgroundColor:"green",
+        backgroundColor:"blueviolet",
         borderColor: 'black',
         borderWidth: 2
      },
@@ -38,7 +31,7 @@ const styles = StyleSheet.create({
       plusSign:{
         fontSize: 60,
         marginBottom: 20, // TEMPORARY
-        color: 'black'
+        color: 'white'
       },
       Dialog:{
         flex: 1

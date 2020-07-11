@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,22 +9,44 @@ import {
   FlatList,
 } from 'react-native';
 
-import Activity from './Activity'  
+ import Activity from './Activity'  
 import Newact from './Newact'   
 import InputPrompt from './InputPrompt' 
 
+import {insertActivity, getActivities, deleteActivities} from './activitySchema'
+import realm from './activitySchema'
+
+
 const MainPage = () => {
-  const [activities, setActivities] = useState( []);
+  const [activities, setActivities] = useState([]);
+
+
+  useEffect(() => {
+      reloadData()
+      realm.addListener('change', () => {reloadData()})
+    },[])
+
+    const reloadData = () => {
+      getActivities().then((activities) =>{
+        setActivities(activities)
+        
+      }).catch((error) => {
+        setActivities([])
+        console.log(error)
+      })
+    }
+    console.log()
     return(
         <View style={styles.mainView} >
 
           <View style={styles.flatList}>
               <FlatList
                 data={activities}
-                renderItem={({ item }) => (
-                  <View >
-                    <Activity title={item.title} seconds={item.seconds} minutes={item.minutes} hours={item.hours}/>
-                    </View>
+                keyExtractor={(item) => item.title}
+                renderItem={({ item }) => ( 
+                   <View >
+                       <Activity title={item.title} seconds={'0'} minutes={'0'} hours={'0'}/>
+                     </View>
                 )}
                 numColumns={2}
               />
@@ -42,7 +64,7 @@ const styles = StyleSheet.create({
     mainView: {
       flex: 1,
       flexDirection: 'column',
-      backgroundColor:"yellow"
+      backgroundColor:"aliceblue"
 
     },
     flatList: {

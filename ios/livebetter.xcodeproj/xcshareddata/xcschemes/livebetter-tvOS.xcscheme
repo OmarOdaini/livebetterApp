@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "project1-tvOS.app"
-               BlueprintName = "project1-tvOS"
-               ReferencedContainer = "container:project1.xcodeproj">
+               BuildableName = "livebetter-tvOS.app"
+               BlueprintName = "livebetter-tvOS"
+               ReferencedContainer = "container:livebetter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "project1-tvOSTests.xctest"
-               BlueprintName = "project1-tvOSTests"
-               ReferencedContainer = "container:project1.xcodeproj">
+               BuildableName = "livebetter-tvOSTests.xctest"
+               BlueprintName = "livebetter-tvOSTests"
+               ReferencedContainer = "container:livebetter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "project1-tvOS.app"
-            BlueprintName = "project1-tvOS"
-            ReferencedContainer = "container:project1.xcodeproj">
+            BuildableName = "livebetter-tvOS.app"
+            BlueprintName = "livebetter-tvOS"
+            ReferencedContainer = "container:livebetter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "project1-tvOS.app"
-            BlueprintName = "project1-tvOS"
-            ReferencedContainer = "container:project1.xcodeproj">
+            BuildableName = "livebetter-tvOS.app"
+            BlueprintName = "livebetter-tvOS"
+            ReferencedContainer = "container:livebetter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

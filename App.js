@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   
   StyleSheet,
   ScrollView,
   View,
+  FlatList,
   Text,
   StatusBar,
 } from 'react-native';
@@ -19,15 +20,14 @@ import {
 import Activity from './Activity'   
 import MainPage from './MainPage'   
 
-
-
-const App: () => React$Node = () => {
+const App = () => {
+  const [activitiesList, setActivitiesList] = useState([])
   return (
   <View style={styles.body}>  
           <View style={styles.mainMenu}> 
             </View>
           <View style={styles.page}> 
-                <MainPage />
+                <MainPage /> 
             </View>
   </View>
   );

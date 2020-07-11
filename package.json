@@ -1,5 +1,5 @@
 {
-  "name": "project1",
+  "name": "livebetter",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,22 +10,21 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react": "16.13.1",
+    "react-native": "0.63.0",
+    "realm": "^6.0.2",
     "react-native-dialog-input": "^1.0.7",
-    "react-native-prompt-android": "^1.1.0",
-    "react-native-stopwatch-timer": "0.0.21",
     "react-stopwatch": "^2.0.4"
   },
   "devDependencies": {
     "@babel/core": "7.10.4",
     "@babel/runtime": "7.10.4",
-    "@react-native-community/eslint-config": "0.0.5",
-    "babel-jest": "24.9.0",
+    "@react-native-community/eslint-config": "1.1.0",
+    "babel-jest": "25.5.1",
     "eslint": "6.8.0",
-    "jest": "24.9.0",
-    "metro-react-native-babel-preset": "0.58.0",
-    "react-test-renderer": "16.11.0"
+    "jest": "25.5.4",
+    "metro-react-native-babel-preset": "0.59.0",
+    "react-test-renderer": "16.13.1"
   },
   "jest": {
     "preset": "react-native"

@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState }  from 'react'
 import {
     StyleSheet,
     SafeAreaView,
@@ -7,12 +7,12 @@ import {
   View,
   Text,
   StatusBar,
-} from 'react-native';
+} from 'react-native'
 
 import Stopwatch from './StopWatch'
 
 const Activity = (props) => {
-    const [start, setStart] = useState(false);
+    const [start, setStart] = useState(false)
     return(
         <View style={styles.container} >
             <View style={styles.circle} >
@@ -20,12 +20,12 @@ const Activity = (props) => {
                     <View style={styles.center}>
                     <Text style={styles.fontFormat1}>{props.title}</Text>
                     <Text style={styles.fontFormat2}>Start</Text>
-                  
+                    <Stopwatch />
                     </View>
                 </TouchableOpacity>
             </View>
         </View>
-    );
+    )
 }
 
  
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 150/2,
-        backgroundColor:"#CD91E8"
+        backgroundColor:"#00ffff"
      },
      stopwatch: {
         backgroundColor: 'transparent' 
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'sans-serif'
       }
-  });
+  })
   
 
-export default Activity;
+export default Activity
