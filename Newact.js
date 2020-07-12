@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         borderRadius: 75/2,
-        backgroundColor:"blueviolet",
+        backgroundColor:"#6948f4",
         borderColor: 'black',
-        borderWidth: 2
+        borderWidth: 0.5
      },
       center: {
         justifyContent: 'center',

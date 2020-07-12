@@ -1,5 +1,5 @@
 {
-  "name": "livebetter",
+  "name": "liveBetterApp",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,11 +10,18 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.10",
     "react": "16.13.1",
     "react-native": "0.63.0",
-    "realm": "^6.0.2",
     "react-native-dialog-input": "^1.0.7",
-    "react-stopwatch": "^2.0.4"
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-reanimated": "^1.9.0",
+    "react-native-safe-area-context": "^3.1.1",
+    "react-native-vector-icons": "^7.0.0",
+    "react-navigation-material-bottom-tabs": "^2.3.0",
+    "realm": "^6.0.2",
+    "react-native-paper": "^3.3.0",
+    "react-navigation": "^4.0.10"
   },
   "devDependencies": {
     "@babel/core": "7.10.4",

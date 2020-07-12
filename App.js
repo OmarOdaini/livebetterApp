@@ -1,64 +1,34 @@
-import React, { useState } from 'react';
-import {
-  SafeAreaView,
-  
-  StyleSheet,
-  ScrollView,
-  View,
-  FlatList,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Activity from './Activity'   
+import React from 'react'
+import {StyleSheet,View, Text} from 'react-native'
 import MainPage from './MainPage'   
+import TabNavigator from './TabNavigator'   
+
+
 
 const App = () => {
-  const [activitiesList, setActivitiesList] = useState([])
   return (
   <View style={styles.body}>  
-          <View style={styles.mainMenu}> 
-            </View>
-          <View style={styles.page}> 
-                <MainPage /> 
-            </View>
+      <View style={styles.page}> 
+            {/* <MainPage /> 
+        </View>
+        <View style={styles.mainMenuView}>  */}
+          <TabNavigator />
+        </View>
   </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   body: {
     flex:1,
-    backgroundColor: Colors.white
   },
-  mainMenu: {
+  mainMenuView: {
     flex:1, 
-    backgroundColor:"#0D0D0D"
+    backgroundColor:"#C0C0C0"
   },
   page: {
-    flex:10, 
-    backgroundColor:"white"
-  },
-  highlight: {
-    fontWeight: '700',
-  }, 
-  circle: {
-    width: 200,
-    height: 200,
-    borderRadius: 200/2,
-    backgroundColor:"red"
- },
-  center: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex:10
   }
-});
+})
 
-export default App;
+export default App

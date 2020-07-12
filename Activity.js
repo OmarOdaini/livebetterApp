@@ -14,7 +14,7 @@ const Activity = props => {
             {/* delete button depends on var*/}
             { deleteButton ?        
             <View style={styles.deleteButton}>
-                      <TouchableOpacity style={styles.touchInDeleteButton} onPress={() => {deleteActivity({title: props.title, isDeleted: true, seconds: props.seconds, minutes: props.minutes, hours: props.hours}).then(setDeleteButton(false)).catch((error) =>{ console.log( 'activity line 24 ', error)})}}>
+                      <TouchableOpacity onPress={() => {deleteActivity({title: props.title, isDeleted: true, seconds: props.seconds, minutes: props.minutes, hours: props.hours}).then(setDeleteButton(false)).catch((error) =>{ console.log( 'activity line 24 ', error)})}}>
                           <View style={styles.viewInDelete}>
                           <Text style={styles.textInDelete}>x</Text>
                           </View>
@@ -22,9 +22,9 @@ const Activity = props => {
                 </View>
                 : null }
 
-            <View style={styles.circle}>                      
+            <View style={styles.circle} onTouchStart={() => setDeleteButton(false)}>                      
                 <TouchableOpacity  style={styles.center} onPress={() => {setRun(!run), setLock(true)}} onLongPress={() => {setDeleteButton(true)}} disabled={deleteButton}>
-                      <View style={styles.center}  onTouchStart={() => setDeleteButton(false)} >
+                      <View style={styles.center} >
                           <Text style={styles.fontFormat1}>{props.title}</Text>
                           {run ? <Text style={styles.fontFormat2}>Pause</Text> : lock ? <Text style={styles.fontFormat2}>Resume</Text> : <Text style={styles.fontFormat2}>Start</Text>}
                           <Stopwatch run={run} seconds={props.seconds} minutes={props.minutes} hours={props.hours} />
@@ -55,35 +55,33 @@ const styles = StyleSheet.create({
       },
       fontFormat1:{
         fontSize: 32,
-        fontFamily: 'sans-serif'
+        fontFamily: 'Roboto'
       },
       fontFormat2:{
         fontSize: 20,
-        fontFamily: 'sans-serif'
+        fontFamily: 'Roboto'
       },
       deleteButton: {
         flex: 1,
         position: 'absolute',  // makes the button independent from others
-        borderColor: 'white',
-        borderWidth: 4,
+        borderColor: 'aliceblue',
+        borderWidth: 6,
         backgroundColor:"red",
         left:115,
-        width: 45,
-        height: 45,
-        borderRadius: 45/2,
+        width: 50,
+        height: 50,
+        borderRadius: 50/2,
         zIndex: 1     // fromt of screen
       },
       textInDelete:{
         color: 'black',
         fontSize: 23,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginTop: 1
       },
       viewInDelete:{
         justifyContent: 'center',
         alignItems: 'center'
-      },
-      touchInDeleteButton:{
-        // flex:1
       }
   })
   

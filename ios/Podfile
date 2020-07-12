@@ -3,12 +3,14 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'livebetter' do
+target 'liveBetterApp' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'livebetterTests' do
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  target 'liveBetterAppTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +25,10 @@ target 'livebetter' do
   end
 end
 
-target 'livebetter-tvOS' do
-  # Pods for livebetter-tvOS
+target 'liveBetterApp-tvOS' do
+  # Pods for liveBetterApp-tvOS
 
-  target 'livebetter-tvOSTests' do
+  target 'liveBetterApp-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

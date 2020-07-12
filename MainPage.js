@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  TouchableOpacity,
-  Text,
-  FlatList,
-} from 'react-native'
+import {StyleSheet,View,FlatList} from 'react-native'
 
  import Activity from './Activity'  
 import Newact from './Newact'   
@@ -43,7 +35,7 @@ const MainPage = () => {
                 data={activities}
                 keyExtractor={(item) => item.title}
                 renderItem={({ item }) => ( 
-                  item.isDeleted == false ?     // data still exist but not rendered 
+                  item.isDeleted == false ?  
                    <View >
                        <Activity title={item.title} seconds={item.seconds} minutes={item.minutes} hours={item.hours}/>
                      </View>

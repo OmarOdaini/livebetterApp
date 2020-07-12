@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.livebetter"
+        applicationId "com.livebetterapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
