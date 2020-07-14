@@ -41,16 +41,20 @@ const useInterval = (callback, delay) => {
 }
 
 const time = currTime =>{
+    console.log('before', currTime)
     currTime[0]++
-    if (currTime[0] >= 59){
-        currTime[1]++
-        currTime[0] = 0   
-    }
     if (currTime[1] >= 59 && currTime[0] >= 59){
         currTime[2]++
         currTime[0] = 0
         currTime[1] = 0    
     }
+    
+    if (currTime[0] >= 59){
+        currTime[1]++
+        currTime[0] = 0   
+    }
+    console.log('after', currTime)
+
     return currTime
 }
 
