@@ -20,24 +20,24 @@ import Feedback from './Feedback'
             screen: Stats,
             navigationOptions: {
               tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'analytics-outline'} />),
-              activeColor: '#ffffff',
-              inactiveColor: '#a3c2fa',
+              activeColor: 'white',
+              inactiveColor: '#C0C0C0',
             }
           },
           Feedback: {
             screen: Feedback,
             navigationOptions: {
               tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'information-circle-outline'} />),
-              activeColor: '#ffffff',
-              inactiveColor: '#a3c2fa',
+              activeColor: 'white',
+              inactiveColor: '#C0C0C0',
             }
           },
         },
         {
           initialRouteName: 'Home',
-          activeColor: '#ffffff',
-          inactiveColor: '#a3c2fa',
-          barStyle: { backgroundColor: '#F662DF' },
+          activeColor: 'white',
+          inactiveColor: '#C0C0C0',
+          barStyle: { backgroundColor: '#383838' },
         }
       )
 

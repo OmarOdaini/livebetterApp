@@ -9,7 +9,7 @@ const Activity = props => {
   const [deleteButton, setDeleteButton] = useState(false)     
 
   return(
-    // could also add clearing delete button to all the screen. also tesdt onResponderMove={()=> {}}   putback }
+    // could also add clearing delete button to all the screen. also test onResponderMove={()=> {}}   putback }
         <View style={styles.container}>   
             {/* delete button depends on var*/}
             { deleteButton ?        
@@ -39,41 +39,46 @@ const Activity = props => {
 const styles = StyleSheet.create({
     container: {
       // flex:1,
-      marginVertical: 10,
+      width: 150, // parent view but still added size
+      height: 150,
+      borderRadius: 150/2,
+      marginVertical: 20,
       marginHorizontal: 28,
     },
     circle: {
-        width: 140,
-        height: 140,
-        borderRadius: 140/2,
+        width: 150,
+        height: 150,
+        borderRadius: 150/2,
         elevation: 10,
-        backgroundColor:"#D399EA"
+        backgroundColor:"#383838"
      },
+    deleteButton: {
+        // flex: 1,
+        width: 43,
+        height: 43,
+        borderRadius: 43/2,
+        position: 'absolute',  // makes the button independent from others
+        borderColor: 'black',
+        borderWidth: 2,
+        backgroundColor:"red",
+        left:115,
+        elevation: 10,
+        zIndex: 2    // fromt of screen
+    },
       center: {
         justifyContent: 'center',
         marginTop: 15,
         alignItems: 'center'
       },
       fontFormat1:{
+        color: '#C0C0C0',
         fontSize: 32,
         fontFamily: 'Roboto'
       },
       fontFormat2:{
+        color: '#C0C0C0',
         fontSize: 20,
         fontFamily: 'Roboto'
-      },
-      deleteButton: {
-        flex: 1,
-        position: 'absolute',  // makes the button independent from others
-        borderColor: 'aliceblue',
-        borderWidth: 3,
-        backgroundColor:"red",
-        left:115,
-        elevation: 10,
-        width: 45,
-        height: 45,
-        borderRadius: 45/2,
-        zIndex: 2    // fromt of screen
       },
       textInDelete:{
         color: 'black',

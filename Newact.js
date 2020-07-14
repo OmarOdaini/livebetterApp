@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     height: 75,
     borderRadius: 75/2,
     elevation: 5,
-    backgroundColor:"#F662DF"
+    backgroundColor:"#191970"
   },
   button: {  
     width: 75,

@@ -34,14 +34,12 @@ const MainPage = () => {
               <FlatList
                 data={activities}
                 keyExtractor={(item) => item.title}
+                numColumns={2}
                 renderItem={({ item }) => ( 
                   item.isDeleted == false ?  
-                   <View >
                        <Activity title={item.title} seconds={item.seconds} minutes={item.minutes} hours={item.hours}/>
-                     </View>
                      : null
                 )}
-                numColumns={2}
               />
             </View>
 
@@ -56,12 +54,11 @@ const MainPage = () => {
 const styles = StyleSheet.create({
     mainView: {
       flex: 1,
-      flexDirection: 'column',
-      backgroundColor:"aliceblue"
-
     },
     flatList: {
-        flex: 1
+        flex: 1,
+        // flexDirection: 'column',
+        backgroundColor:"#0A0A0A"
     },
     addButtom:{
       position: 'absolute',
