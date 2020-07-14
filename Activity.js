@@ -27,7 +27,7 @@ const Activity = props => {
                       <View style={styles.center} >
                           <Text style={styles.fontFormat1}>{props.title}</Text>
                           {run ? <Text style={styles.fontFormat2}>Pause</Text> : lock ? <Text style={styles.fontFormat2}>Resume</Text> : <Text style={styles.fontFormat2}>Start</Text>}
-                          <Stopwatch run={run} seconds={props.seconds} minutes={props.minutes} hours={props.hours} />
+                          <Stopwatch run={run} title={props.title} seconds={props.seconds} minutes={props.minutes} hours={props.hours} />
                       </View>
                     </TouchableOpacity>
               </View>
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         width: 140,
         height: 140,
         borderRadius: 140/2,
+        elevation: 10,
         backgroundColor:"#D399EA"
      },
       center: {
@@ -65,13 +66,14 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',  // makes the button independent from others
         borderColor: 'aliceblue',
-        borderWidth: 6,
+        borderWidth: 3,
         backgroundColor:"red",
         left:115,
-        width: 50,
-        height: 50,
-        borderRadius: 50/2,
-        zIndex: 1     // fromt of screen
+        elevation: 10,
+        width: 45,
+        height: 45,
+        borderRadius: 45/2,
+        zIndex: 2    // fromt of screen
       },
       textInDelete:{
         color: 'black',

@@ -9,9 +9,6 @@ const App = () => {
   return (
   <View style={styles.body}>  
       <View style={styles.page}> 
-            {/* <MainPage /> 
-        </View>
-        <View style={styles.mainMenuView}>  */}
           <TabNavigator />
         </View>
   </View>

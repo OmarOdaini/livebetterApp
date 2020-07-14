@@ -12,7 +12,7 @@ const Stopwatch = props => {
 
     useEffect(() => {
         if(!props.run)
-            updateActivity({title: 'test', seconds: timeArray[0], minutes:  timeArray[1], hours: timeArray[2]}).then().catch((error) =>{ console.log(error)  })
+            updateActivity({title: props.title, seconds: timeArray[0], minutes:  timeArray[1], hours: timeArray[2]}).then().catch((error) =>{ console.log(error)  })
     },[props.run] )
     
      return(

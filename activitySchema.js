@@ -23,6 +23,7 @@ const databaseOptions = {
     schema: [Activity],
     schemaVersion: 6.0
 }
+
 //Functions
 export const insertActivity = newActivity => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
@@ -36,11 +37,11 @@ export const insertActivity = newActivity => new Promise((resolve, reject) => {
 export const getActivities = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         let activitiesList = realm.objects(ACTIVITY_SCHEMA)
-        
         resolve(activitiesList)
     }).catch((error) => reject(error))
 })
 
+// used for seving time when pausing the stopwatch
 export const updateActivity = activity => new Promise((resolve, reject) => {    
     Realm.open(databaseOptions).then(realm => {        
         realm.write(() => {
@@ -53,36 +54,37 @@ export const updateActivity = activity => new Promise((resolve, reject) => {
     }).catch((error) => reject(error))
 })
 
-export const deleteActivity = activity => new Promise((resolve, reject) => {    
+//used when creating an activity that exists before
+export const updateActivityStatus = activity => new Promise((resolve, reject) => {    
     Realm.open(databaseOptions).then(realm => {        
         realm.write(() => {
             let UpdatedActivity = realm.objectForPrimaryKey(ACTIVITY_SCHEMA, activity.title)   
-                UpdatedActivity.seconds = activity.seconds  
-                UpdatedActivity.minutes = activity.minutes    
-                UpdatedActivity.hours = activity.hours 
-                UpdatedActivity.isDeleted = activity.isDeleted    
+            UpdatedActivity.isDeleted = activity.isDeleted    
             resolve()     
         })
     }).catch((error) => reject(error))
 })
 
-export const updateTodoList = todoList => new Promise((resolve, reject) => {    
+// used when deleting an activity. Updates cuurent time and hide
+export const deleteActivity = activity => new Promise((resolve, reject) => {    
     Realm.open(databaseOptions).then(realm => {        
         realm.write(() => {
-            let updatingTodoList = realm.objectForPrimaryKey(TODOLIST_SCHEMA, todoList.id);   
-            updatingTodoList.name = todoList.name;    
-            resolve();     
-        });
-    }).catch((error) => reject(error));;
-});
+            let UpdatedActivity = realm.objectForPrimaryKey(ACTIVITY_SCHEMA, activity.title)  
+            UpdatedActivity.seconds = activity.seconds  
+            UpdatedActivity.minutes = activity.minutes    
+            UpdatedActivity.hours = activity.hours 
+            UpdatedActivity.isDeleted = activity.isDeleted    
+            resolve()     
+        })
+    }).catch((error) => reject(error))
+})
 
 
 export const deleteActivities = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         realm.write(()=> {
             let activitiesList = realm.objects(ACTIVITY_SCHEMA)
-            realm.delete(activitiesList)
-            
+            realm.delete(activitiesList)            
         })
     }).catch((error) => reject(error))
 })

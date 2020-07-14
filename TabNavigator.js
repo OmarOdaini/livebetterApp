@@ -13,21 +13,13 @@ import Feedback from './Feedback'
           Home: {
             screen: MainPage,
             navigationOptions: {
-              tabBarIcon: () => (
-                <View>
-                  <Icon style={[{color: 'white'}]} size={25} name={'stopwatch-outline'} />
-                </View>
-              ),
+              tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'stopwatch-outline'} />),
             }
           },
           Statistics: {
             screen: Stats,
             navigationOptions: {
-              tabBarIcon: () => (
-                <View>
-                  <Icon style={[{color: 'white'}]} size={25} name={'analytics-outline'} />
-                </View>
-              ),
+              tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'analytics-outline'} />),
               activeColor: '#ffffff',
               inactiveColor: '#a3c2fa',
             }
@@ -35,11 +27,7 @@ import Feedback from './Feedback'
           Feedback: {
             screen: Feedback,
             navigationOptions: {
-              tabBarIcon: () => (
-                <View>
-                  <Icon style={[{color: 'white'}]} size={25} name={'information-circle-outline'} />
-                </View>
-              ),
+              tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'information-circle-outline'} />),
               activeColor: '#ffffff',
               inactiveColor: '#a3c2fa',
             }
@@ -48,8 +36,8 @@ import Feedback from './Feedback'
         {
           initialRouteName: 'Home',
           activeColor: '#ffffff',
-          inactiveColor: '#bda1f7',
-          barStyle: { backgroundColor: '#6948f4' },
+          inactiveColor: '#a3c2fa',
+          barStyle: { backgroundColor: '#F662DF' },
         }
       )
 
