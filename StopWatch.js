@@ -6,14 +6,15 @@ const Stopwatch = props => {
     const [timeArray, setTime] = useState([props.seconds,props.minutes,props.hours])
 
     useInterval(()=> {
-        if(props.run)
+        // console.log('Activity ',props.title, 'run: ',props.run,'Running: ', props.isRunning)
+        if(props.isRunning) //props.run &&
             setTime(val => [...time(val)])
     }, 1000)
 
     useEffect(() => {
-        if(!props.run)
+        if(!props.isRunning) //!props.run
             updateActivity({title: props.title, seconds: timeArray[0], minutes:  timeArray[1], hours: timeArray[2]}).then().catch((error) =>{ console.log(error)  })
-    },[props.run] )
+    },[props.isRunning] )
     
      return(
         <View>

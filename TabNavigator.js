@@ -21,7 +21,7 @@ import Feedback from './Feedback'
             navigationOptions: {
               tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'analytics-outline'} />),
               activeColor: 'white',
-              inactiveColor: '#C0C0C0',
+              inactiveColor: '#838383',
             }
           },
           Feedback: {
@@ -29,14 +29,14 @@ import Feedback from './Feedback'
             navigationOptions: {
               tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'information-circle-outline'} />),
               activeColor: 'white',
-              inactiveColor: '#C0C0C0',
+              inactiveColor: '#838383',
             }
           },
         },
         {
           initialRouteName: 'Home',
           activeColor: 'white',
-          inactiveColor: '#C0C0C0',
+          inactiveColor: '#838383',
           barStyle: { backgroundColor: '#383838' },
         }
       )

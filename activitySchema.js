@@ -9,6 +9,7 @@ export const  Activity = {
     properties: {
         title: { type: 'string'},
         isDeleted: { type: 'bool', default: false },
+        isRunning: { type: 'bool', default: false },
         seconds: { type: 'int', default: 0 },
         minutes: { type: 'int', default: 0 },
         hours: { type: 'int', default: 0 },
@@ -21,7 +22,7 @@ export const  Activity = {
 const databaseOptions = {
     path: 'local.realm',
     schema: [Activity],
-    schemaVersion: 6.0
+    schemaVersion: 0.1
 }
 
 //Functions
@@ -36,7 +37,14 @@ export const insertActivity = newActivity => new Promise((resolve, reject) => {
 
 export const getActivities = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
-        let activitiesList = realm.objects(ACTIVITY_SCHEMA)
+        let activitiesList = realm.objects(ACTIVITY_SCHEMA).filtered('isDeleted == false')
+        resolve(activitiesList)
+    }).catch((error) => reject(error))
+})
+
+export const getRunningActivities = (activity) => new Promise((resolve, reject) => {
+    Realm.open(databaseOptions).then(realm => {
+        let activitiesList = realm.objects(ACTIVITY_SCHEMA).filtered('isRunning == true')
         resolve(activitiesList)
     }).catch((error) => reject(error))
 })
@@ -65,6 +73,27 @@ export const updateActivityStatus = activity => new Promise((resolve, reject) =>
     }).catch((error) => reject(error))
 })
 
+//used when creating an activity that exists before
+export const updateRunningStatus = activity => new Promise((resolve, reject) => {    
+    Realm.open(databaseOptions).then(realm => {        
+        realm.write(() => {
+            let UpdatedActivity = realm.objectForPrimaryKey(ACTIVITY_SCHEMA, activity.title)   
+            UpdatedActivity.isRunning = activity.isRunning    
+            resolve()     
+        })
+    }).catch((error) => reject(error))
+})
+
+export const stopRunningActivites = activity => new Promise((resolve, reject) => {    
+    Realm.open(databaseOptions).then(realm => {        
+        realm.write(() => {
+            let UpdatedActivity = realm.objects(ACTIVITY_SCHEMA).filtered('isRunning == true') 
+            UpdatedActivity.forEach(activity => activity.isRunning = false)
+            resolve()     
+        })
+    }).catch((error) => reject(error))
+})
+
 // used when deleting an activity. Updates cuurent time and hide
 export const deleteActivity = activity => new Promise((resolve, reject) => {    
     Realm.open(databaseOptions).then(realm => {        
@@ -73,7 +102,8 @@ export const deleteActivity = activity => new Promise((resolve, reject) => {
             UpdatedActivity.seconds = activity.seconds  
             UpdatedActivity.minutes = activity.minutes    
             UpdatedActivity.hours = activity.hours 
-            UpdatedActivity.isDeleted = activity.isDeleted    
+            UpdatedActivity.isDeleted = activity.isDeleted 
+            UpdatedActivity.isRunning = activity.isRunning       
             resolve()     
         })
     }).catch((error) => reject(error))

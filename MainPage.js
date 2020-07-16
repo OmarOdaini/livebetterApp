@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {StyleSheet,View,FlatList} from 'react-native'
+import {StyleSheet,View,FlatList,Dimensions} from 'react-native'
 
  import Activity from './Activity'  
 import Newact from './Newact'   
@@ -7,7 +7,8 @@ import InputPrompt from './InputPrompt'
 
 import {insertActivity, getActivities, deleteActivities} from './activitySchema'
 import realm from './activitySchema'
-
+ 
+const {width, height} = Dimensions.get('window');
 
 const MainPage = () => {
   const [activities, setActivities] = useState([])
@@ -19,6 +20,7 @@ const MainPage = () => {
     },[])
 
     const reloadData = () => {
+      console.log('gettiung datat')
       getActivities().then((activities) =>{
         setActivities(activities)
         
@@ -30,18 +32,15 @@ const MainPage = () => {
     console.log()
     return(
         <View style={styles.mainView} >
-          <View style={styles.flatList}>
+          
               <FlatList
-                data={activities}
-                keyExtractor={(item) => item.title}
                 numColumns={2}
-                renderItem={({ item }) => ( 
-                  item.isDeleted == false ?  
-                       <Activity title={item.title} seconds={item.seconds} minutes={item.minutes} hours={item.hours}/>
-                     : null
+                data={activities}
+                renderItem={({ item }) => (
+                        <Activity title={item.title} seconds={item.seconds} minutes={item.minutes} hours={item.hours} isRunning={item.isRunning} />
                 )}
+                keyExtractor={(item) => item.title}
               />
-            </View>
 
             <View style={styles.addButtom} >
                <Newact activities={activities} setActivities={setActivities}/>
@@ -54,11 +53,9 @@ const MainPage = () => {
 const styles = StyleSheet.create({
     mainView: {
       flex: 1,
-    },
-    flatList: {
-        flex: 1,
-        // flexDirection: 'column',
-        backgroundColor:"#0A0A0A"
+      justifyContent: 'center',
+      flexDirection: 'column',
+      backgroundColor:"#0A0A0A"
     },
     addButtom:{
       position: 'absolute',

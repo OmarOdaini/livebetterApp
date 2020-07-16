@@ -1,10 +1,10 @@
 import React, {useState}  from 'react'
-import {deleteActivity} from './activitySchema'
+import {deleteActivity, updateRunningStatus, getRunningActivities, stopRunningActivites} from './activitySchema'
 import {StyleSheet,TouchableOpacity,View,Text} from 'react-native'
 import Stopwatch from './StopWatch'
 
 const Activity = props => {
-  const [run, setRun] = useState(false)         //Stopwatch trigger
+  // const [run, setRun] = useState(false)         //Stopwatch trigger
   const [lock, setLock] = useState(false)            //for display purpose resume vs start
   const [deleteButton, setDeleteButton] = useState(false)     
 
@@ -14,7 +14,7 @@ const Activity = props => {
             {/* delete button depends on var*/}
             { deleteButton ?        
             <View style={styles.deleteButton}>
-                      <TouchableOpacity onPress={() => {deleteActivity({title: props.title, isDeleted: true, seconds: props.seconds, minutes: props.minutes, hours: props.hours}).then(setDeleteButton(false)).catch((error) =>{ console.log( 'activity line 24 ', error)})}}>
+                      <TouchableOpacity onPress={() => {deleteActivity({title: props.title, isDeleted: true, isRunning:false, seconds: props.seconds, minutes: props.minutes, hours: props.hours}).then(setDeleteButton(false)).catch((error) =>{ console.log( 'activity line 24 ', error)})}}>
                           <View style={styles.viewInDelete}>
                           <Text style={styles.textInDelete}>x</Text>
                           </View>
@@ -23,11 +23,20 @@ const Activity = props => {
                 : null }
 
             <View style={styles.circle} onTouchStart={() => setDeleteButton(false)}>                      
-                <TouchableOpacity  style={styles.center} onPress={() => {setRun(!run), setLock(true)}} onLongPress={() => {setDeleteButton(true)}} disabled={deleteButton}>
+                <TouchableOpacity  style={styles.center} onPress={() => {
+                    // setRun(!run)
+                    setLock(true)
+                    // get all isRunning and turn them off. Then update current to On
+                    if(!props.isRunning){ // !run
+                      stopRunningActivites().then().catch((error) =>{ console.log( 'activity stopRunningActivites ', error)})
+                    }
+                    updateRunningStatus({title: props.title, isRunning: !props.isRunning}).then().catch((error) =>{ console.log( 'activity updateRunningStatus ', error)})
+                  }
+                } onLongPress={() => {setDeleteButton(true)}} disabled={deleteButton}>
                       <View style={styles.center} >
                           <Text style={styles.fontFormat1}>{props.title}</Text>
-                          {run ? <Text style={styles.fontFormat2}>Pause</Text> : lock ? <Text style={styles.fontFormat2}>Resume</Text> : <Text style={styles.fontFormat2}>Start</Text>}
-                          <Stopwatch run={run} title={props.title} seconds={props.seconds} minutes={props.minutes} hours={props.hours} />
+                          { props.isRunning ? <Text style={styles.fontFormat2}>Pause</Text> : lock ? <Text style={styles.fontFormat2}>Resume</Text> : <Text style={styles.fontFormat2}>Start</Text>}
+                          <Stopwatch title={props.title} seconds={props.seconds} minutes={props.minutes} hours={props.hours} isRunning={props.isRunning} />
                       </View>
                     </TouchableOpacity>
               </View>
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 150/2,
-        elevation: 10,
+        elevation: 15,
         backgroundColor:"#383838"
      },
     deleteButton: {
@@ -62,8 +71,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         backgroundColor:"red",
         left:115,
-        elevation: 10,
-        zIndex: 2    // fromt of screen
+        elevation: 15,
+        zIndex: 3    // fromt of screen
     },
       center: {
         justifyContent: 'center',
@@ -83,6 +92,7 @@ const styles = StyleSheet.create({
       textInDelete:{
         color: 'black',
         fontSize: 23,
+        fontFamily: 'Roboto',
         fontWeight: "bold",
         marginTop: 1
       },
