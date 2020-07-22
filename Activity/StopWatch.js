@@ -1,21 +1,23 @@
 import React, { useEffect, useState, useRef }  from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import {updateActivity} from './activitySchema'
+import {updateActivity} from '../DBSchemas/activitySchema'
 
 const Stopwatch = props => {
+    // maintain time 
     const [timeArray, setTime] = useState([props.seconds,props.minutes,props.hours])
 
+    // custom Hook based on setInterval
     useInterval(()=> {
-        // console.log('Activity ',props.title, 'run: ',props.run,'Running: ', props.isRunning)
-        if(props.isRunning) //props.run &&
+        if(props.isRunning) 
             setTime(val => [...time(val)])
     }, 1000)
 
+    // when isRunning switch from true to false (Paused)
     useEffect(() => {
-        if(!props.isRunning) //!props.run
+        if(!props.isRunning) 
             updateActivity({title: props.title, seconds: timeArray[0], minutes:  timeArray[1], hours: timeArray[2]}).then().catch((error) =>{ console.log(error)  })
-    },[props.isRunning] )
-    
+    },[props.isRunning])
+
      return(
         <View>
              <Text style={styles.stopwatch}>{("0" + timeArray[2]).slice(-2)}:{("0" + timeArray[1]).slice(-2)}:{("0" + timeArray[0]).slice(-2)}</Text> 
@@ -40,7 +42,6 @@ const useInterval = (callback, delay) => {
       }
     }, [delay]);
 }
-
 const time = currTime =>{
     currTime[0]++
     if (currTime[1] >= 59 && currTime[0] >= 59){
@@ -55,7 +56,6 @@ const time = currTime =>{
     }
     return currTime
 }
-
 const styles = StyleSheet.create({
     stopwatch: {
         fontSize: 18,
@@ -63,5 +63,4 @@ const styles = StyleSheet.create({
     }
 })
   
-
 export default Stopwatch

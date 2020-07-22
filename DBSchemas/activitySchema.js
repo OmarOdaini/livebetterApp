@@ -1,8 +1,7 @@
 import Realm from 'realm'
 
+// Define schema
 export const ACTIVITY_SCHEMA  = 'Activity'
-
-// Define schemas
 export const  Activity = {
     name: ACTIVITY_SCHEMA,
     primaryKey: 'title',
@@ -12,17 +11,14 @@ export const  Activity = {
         isRunning: { type: 'bool', default: false },
         seconds: { type: 'int', default: 0 },
         minutes: { type: 'int', default: 0 },
-        hours: { type: 'int', default: 0 },
-        day: { type: 'int', default: new Date().getDate()},
-        month: { type: 'int', default: new Date().getMonth()},
-        year: { type: 'int', default: new Date().getFullYear()}
+        hours: { type: 'int', default: 0 }
     }
 }
 
 const databaseOptions = {
     path: 'local.realm',
     schema: [Activity],
-    schemaVersion: 0.1
+    schemaVersion: 0.2
 }
 
 //Functions
@@ -34,13 +30,36 @@ export const insertActivity = newActivity => new Promise((resolve, reject) => {
         })
     }).catch((error) => reject(error))
 })
-
-export const getActivities = () => new Promise((resolve, reject) => {
+///////////////////////////////////////////////
+// MainView list current activities nonDeleted
+//////////////////////////////////////////////
+export const getCurrentActivities = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         let activitiesList = realm.objects(ACTIVITY_SCHEMA).filtered('isDeleted == false')
         resolve(activitiesList)
     }).catch((error) => reject(error))
 })
+
+////////////////////////////////////
+// MainView list current activities
+///////////////////////////////////
+export const getActivities = () =>  new Promise((resolve, reject) => {
+    Realm.open(databaseOptions).then(realm => {
+        let activitiesList = realm.objects(ACTIVITY_SCHEMA)
+        resolve(activitiesList)
+    }).catch((error) => reject(error))
+})
+
+
+export const getSyncActivities = () =>{ 
+    return new Promise((resolve, reject) => {
+        Realm.open(databaseOptions).then(realm => {
+            let activitiesList = realm.objects(ACTIVITY_SCHEMA)
+            resolve(activitiesList)
+        }).catch((error) => reject(error))
+    })
+}
+
 
 export const getRunningActivities = (activity) => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
@@ -114,7 +133,8 @@ export const deleteActivities = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         realm.write(()=> {
             let activitiesList = realm.objects(ACTIVITY_SCHEMA)
-            realm.delete(activitiesList)            
+            realm.delete(activitiesList)        
+            resolve('deleted')    
         })
     }).catch((error) => reject(error))
 })

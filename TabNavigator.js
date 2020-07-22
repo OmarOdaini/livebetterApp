@@ -4,9 +4,9 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import {createAppContainer} from 'react-navigation'
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
-import MainPage from './MainPage'  
-import Stats from './Stats'   
-import Feedback from './Feedback'
+import MainPage from './MainViews/MainPage'  
+import Stats from './MainViews/Stats'   
+import Feedback from './MainViews/Feedback'
 
     const TabNavigator = createMaterialBottomTabNavigator(
         {
@@ -14,14 +14,14 @@ import Feedback from './Feedback'
             screen: MainPage,
             navigationOptions: {
               tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'stopwatch-outline'} />),
+              activeColor: 'white',
+              inactiveColor: '#838383'
             }
           },
           Statistics: {
             screen: Stats,
             navigationOptions: {
-              tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'analytics-outline'} />),
-              activeColor: 'white',
-              inactiveColor: '#838383',
+              tabBarIcon: () => (<Icon style={[{color: 'white'}]} size={27} name={'analytics-outline'} />)
             }
           },
           Feedback: {
@@ -34,7 +34,7 @@ import Feedback from './Feedback'
           },
         },
         {
-          initialRouteName: 'Home',
+          initialRouteName: 'Statistics',
           activeColor: 'white',
           inactiveColor: '#838383',
           barStyle: { backgroundColor: '#383838' },

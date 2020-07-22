@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet,View, Text} from 'react-native'
-import MainPage from './MainPage'   
+import {StyleSheet,View} from 'react-native'
 import TabNavigator from './TabNavigator'   
+import Reset from './Reset'   
 
 
 
@@ -10,6 +10,7 @@ const App = () => {
   <View style={styles.body}>  
       <View style={styles.page}> 
           <TabNavigator />
+          <Reset />
         </View>
   </View>
   )

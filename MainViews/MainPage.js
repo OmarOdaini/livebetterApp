@@ -1,38 +1,27 @@
+/*
+difference between passing set func or having func inside component line 18
+*/
+
 import React, { useState, useEffect } from 'react'
 import {StyleSheet,View,FlatList,Dimensions} from 'react-native'
 
- import Activity from './Activity'  
-import Newact from './Newact'   
-import InputPrompt from './InputPrompt' 
-
-import {insertActivity, getActivities, deleteActivities} from './activitySchema'
-import realm from './activitySchema'
+ import Activity from '../Activity/Activity'  
+import Newact from '../newActivity/Newact'   
+import {getCurrentActivities} from '../DBSchemas/activitySchema'
+import realm from '../DBSchemas/activitySchema'
  
 const {width, height} = Dimensions.get('window');
 
 const MainPage = () => {
-  const [activities, setActivities] = useState([])
-
+  const [activities, setActivities] = useState()
 
   useEffect(() => {
-      reloadData()
-      realm.addListener('change', () => {reloadData()})
+      reloadData(setActivities)
+      realm.addListener('change', () => {reloadData(setActivities)})
     },[])
 
-    const reloadData = () => {
-      console.log('gettiung datat')
-      getActivities().then((activities) =>{
-        setActivities(activities)
-        
-      }).catch((error) => {
-        setActivities([])
-        console.log(error)
-      })
-    }
-    console.log()
     return(
-        <View style={styles.mainView} >
-          
+        <View style={styles.mainView}>
               <FlatList
                 numColumns={2}
                 data={activities}
@@ -43,24 +32,32 @@ const MainPage = () => {
               />
 
             <View style={styles.addButtom} >
-               <Newact activities={activities} setActivities={setActivities}/>
+               <Newact />
             </View>
         </View>
     ) 
+}
+
+const reloadData = (setActivities) => {
+  getCurrentActivities().then((activities) =>{
+    setActivities(activities)
+    
+  }).catch((error) => {
+    setActivities([])
+    console.log( 'MainPage.js getCurrentActivities()', error)
+  })
 }
 
 
 const styles = StyleSheet.create({
     mainView: {
       flex: 1,
-      justifyContent: 'center',
-      flexDirection: 'column',
       backgroundColor:"#0A0A0A"
     },
     addButtom:{
       position: 'absolute',
-      bottom:10,
-      right:10
+      bottom:15,
+      right:15
     }
   })
   
