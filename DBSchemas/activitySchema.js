@@ -17,8 +17,7 @@ export const  Activity = {
 
 const databaseOptions = {
     path: 'local.realm',
-    schema: [Activity],
-    schemaVersion: 0.2
+    schema: [Activity]
 }
 
 //Functions

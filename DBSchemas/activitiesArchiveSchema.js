@@ -10,7 +10,6 @@ const date =  time.getDate() + "/" + (time.getMonth() + 1) + "/" + time.getFullY
 
 export const  Activities_archive = {
     name: ACTIVITY_ARCHIVE_SCHEMA,
-    // primaryKey: 'date',
     properties: {
         date: { type: 'string', default: date},
         seconds: { type: 'int', default: 0 },
@@ -29,8 +28,7 @@ export const archive_list = {
 }
 const databaseOptions = {
     path: 'local.realm',
-    schema: [Activities_archive,archive_list],
-    schemaVersion: 0.2
+    schema: [Activities_archive,archive_list]
 }
 /////////////////////////////////////////////
 // Realm.close()
@@ -39,7 +37,16 @@ const databaseOptions = {
 
 //Functions
 /////////////////////////////////////////////
-// Get Activity based on title //
+// Get All Archives//
+/////////////////////////////////////////////
+export const getAllArchive = () =>{  return new Promise((resolve, reject) => {
+    Realm.open(databaseOptions).then(realm => {
+        let activitiesList = realm.objects(ARCHIVE_LIST_SCHEMA) 
+            resolve(activitiesList)
+    }).catch((error) => reject(error))
+})}
+/////////////////////////////////////////////
+// Get Archive based on title //
 /////////////////////////////////////////////
 export const getArchive = (title) =>{  return new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {

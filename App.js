@@ -2,6 +2,7 @@ import React from 'react'
 import {StyleSheet,View} from 'react-native'
 import TabNavigator from './TabNavigator'   
 import Reset from './Reset'   
+import PieChart from './PieChart'   
 
 
 
@@ -10,7 +11,7 @@ const App = () => {
   <View style={styles.body}>  
       <View style={styles.page}> 
           <TabNavigator />
-          <Reset />
+          {/* <Reset /> */}
         </View>
   </View>
   )

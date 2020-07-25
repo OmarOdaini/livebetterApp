@@ -1,4 +1,7 @@
-import React, {useEffect} from 'react'
+/*
+Might consider minimize the number of write commands and make this one DB method
+*/
+import {useEffect} from 'react'
 import {getSyncActivities, deleteActivities} from './DBSchemas/activitySchema'
 import {insertArchive, updateArchiveRecords, getArchive} from './DBSchemas/activitiesArchiveSchema'
 
@@ -20,12 +23,10 @@ const currActivities = async () => {
     deleteActivities().catch((error) => console.log('Reset.js deleteActivities()', error))
 }
 const Reset = () => {
-
     //Runs only on first render
     useEffect(() => {
             currActivities()
     },[])
-
     return null
 }
 

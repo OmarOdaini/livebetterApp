@@ -6,18 +6,21 @@ import {StyleSheet,View, Text} from 'react-native'
 
 const FeedBack = () => {
   return (
-  <View style={styles.body}>  
-    <Text>Hello To FeedBack </Text>
+  <View style={styles.container}>  
+    <Text style={styles.textInHeader}>Hello To FeedBack </Text>
   </View>
   )
 }
 
 const styles = StyleSheet.create({
-  body: {
-    flex:1,
-    fontSize: 200,
-    justifyContent: 'center'
-  }
+    container:{
+      flex: 1,
+      backgroundColor:"#0A0A0A"
+    },
+    textInHeader:{
+      color: 'gray',
+      fontSize: 28
+    }
 })
 
 export default FeedBack

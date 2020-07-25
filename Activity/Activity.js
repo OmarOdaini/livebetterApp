@@ -13,19 +13,19 @@ const Activity = props => {
 
   return(
         <View style={styles.activityContainer} onTouchStart={() => setDeleteButton(false)}>   
-            {deleteButton ?        
               <View style={styles.deleteButton}>
-                <TouchableOpacity onPress={() => {
+                <TouchableOpacity style={styles.deleteTO} onPress={() => {
+                    console.log('sdf')
                     deleteActivity({title: props.title, isDeleted: true, isRunning:false, seconds: props.seconds, minutes: props.minutes, hours: props.hours}
-                    ).then().catch((error) =>{console.log(error)})
-                    // setDeleteButton(false)
+                    ).catch((error) =>{console.log(error)})
+                    setDeleteButton(false)
                     }}>
                       <View style={styles.viewInDelete}>
                           <Text style={styles.textInDelete}>x</Text>
                       </View>
                     </ TouchableOpacity>
                   </View>
-              : null}
+        
                
                 <TouchableOpacity 
                 style={styles.activityTO} 
@@ -34,7 +34,7 @@ const Activity = props => {
                     if(!props.isRunning){ 
                       stopRunningActivites().then().catch((error) =>{ console.log( 'activity stopRunningActivites', error)})
                     }
-                    updateRunningStatus({title: props.title, isRunning: !props.isRunning}).then().catch((error) =>{ console.log( 'activity updateRunningStatus', error)})
+                    updateRunningStatus({title: props.title, isRunning: !props.isRunning}).catch((error) =>{ console.log( 'activity updateRunningStatus', error)})
                   }
                 } 
                 onLongPress={() => {setDeleteButton(true)}} 
@@ -92,11 +92,17 @@ const styles = StyleSheet.create({
         elevation: 17,
         zIndex: 3    // fromt of screen
     },
+    deleteTO:{
+      width: 43,
+      height: 43,
+      borderRadius: 43/2
+    },
       textInDelete:{
         color: 'black',
         fontSize: 23,
         fontWeight: "bold",
-        marginTop: 1
+        marginTop: 1,
+        marginRight: 4
       },
       viewInDelete:{
         alignItems: 'center'
