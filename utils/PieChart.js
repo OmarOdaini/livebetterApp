@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {StyleSheet, View, Text, Dimensions} from 'react-native'
 import { VictoryPie, VictoryLegend } from "victory-native"
-import {getAllArchive} from '../DBSchemas/activitiesArchiveSchema'
+import {getAllArchive} from '../Schemas/activitiesArchiveSchema'
 
 const currArchives = async (setArchives) => setArchives(await getAllArchive())
 

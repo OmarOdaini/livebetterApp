@@ -6,7 +6,7 @@ import { StyleSheet, Text } from 'react-native';
 import Ripple from 'react-native-material-ripple'
 import InputPrompt from './inputPrompt' 
 
-const Newact = () => {
+const AddActivity = () => {
   const [prompt, setPrompt] = useState(false);
     return(
         <>
@@ -37,5 +37,5 @@ const styles = StyleSheet.create({
   })
   
 
-export default Newact
+export default AddActivity
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DialogInput from 'react-native-dialog-input';
 import { View } from 'react-native';
-import { insertActivity, getActivities, updateActivityStatus } from '../DBSchemas/activitySchema'
+import { insertActivity, getActivities, updateActivityStatus } from '../Schemas/activitySchema'
 
 const InputPrompt = props => {
     const [hint, setHint] = useState('Enter activity name.....')
@@ -35,7 +35,7 @@ const InputPrompt = props => {
                             }
 
                             if (!exists) {
-                                insertActivity({ title: inputText }).then().catch((error) => { console.log(error) })
+                                insertActivity({ title: inputText }).catch((error) => { console.log(error) })
                             }
                         }).catch((error) => { console.log('getactivities InputPrompt.js ', error) })
 

@@ -2,7 +2,7 @@
 touch overflows activityContainer into a square
 */
 import React, {useState}  from 'react'
-import {deleteActivity, updateRunningStatus, stopRunningActivites} from '../DBSchemas/activitySchema'
+import {deleteActivity, updateRunningStatus, stopRunningActivites} from '../Schemas/activitySchema'
 import {StyleSheet,TouchableOpacity,View,Text, Dimensions} from 'react-native'
 import Stopwatch from './StopWatch'
 const WindowWidth = Dimensions.get('window').width
@@ -10,6 +10,7 @@ const WindowWidth = Dimensions.get('window').width
 const Activity = props => {
   const [lock, setLock] = useState(false)       // control status start / resume
   const [deleteButton, setDeleteButton] = useState(false)   // control delete button
+  const [deleteAction, setDeleteAction] = useState(false)   // control delete button
 
   return(
       // main view
@@ -20,11 +21,8 @@ const Activity = props => {
           { deleteButton && <View style={styles.deleteButton}>
              <TouchableOpacity 
                 style={styles.deleteTO} 
-                onPress={() => {
-                  deleteActivity({title: props.title, isDeleted: true, isRunning:false, seconds: props.seconds, minutes: props.minutes, hours: props.hours}
-                  ).catch((error) =>{console.log(error)});
-                  }
-                  }>
+                onPress={() => { if (!deleteAction) setDeleteAction(true) }}
+              >
                     <Text style={styles.textInDelete}>x</Text>
                   </ TouchableOpacity>
                 </View> }
@@ -57,7 +55,7 @@ const Activity = props => {
 
                 <View style={styles.textView}>
                   <Text style={styles.titleStyle}>{props.title}</Text>
-                  <Stopwatch title={props.title} seconds={props.seconds} minutes={props.minutes} hours={props.hours} isRunning={props.isRunning} />            
+                  <Stopwatch title={props.title} seconds={props.seconds} minutes={props.minutes} hours={props.hours} isRunning={props.isRunning} delete={deleteAction} />            
                   { props.isRunning ? <Text style={styles.statusStyle}>Pause</Text> : lock ? <Text style={styles.statusStyle}>Resume</Text> : <Text style={styles.statusStyle}>Start</Text>}
                 </View>
               </TouchableOpacity>

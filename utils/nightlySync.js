@@ -2,8 +2,8 @@
 Might consider minimize the number of write commands and make this one DB method
 */
 import {useEffect} from 'react'
-import {getSyncActivities, deleteActivities} from '../DBSchemas/activitySchema'
-import {insertArchive, updateArchiveRecords, getArchive} from '../DBSchemas/activitiesArchiveSchema'
+import {getSyncActivities, deleteActivities} from '../Schemas/activitySchema'
+import {insertArchive, updateArchiveRecords, getArchive} from '../Schemas/activitiesArchiveSchema'
 
 const currActivities = async () => { 
     // Get Today's Activities

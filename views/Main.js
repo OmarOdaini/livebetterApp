@@ -5,9 +5,9 @@ difference between passing set func or having func inside component line 18
 import React, { useState, useEffect } from 'react'
 import {StyleSheet,View,FlatList,Dimensions} from 'react-native'
 import Activity from '../Activity/Activity'  
-import Newact from '../newActivity/plusBtn'   
-import {getCurrentActivities} from '../DBSchemas/activitySchema'
-import realm from '../DBSchemas/activitySchema'
+import AddActivity from '../newActivity/plusBtn'   
+import {getCurrentActivities} from '../Schemas/activitySchema'
+import realm from '../Schemas/activitySchema'
  
 const Main = () => {
   const [activities, setActivities] = useState()
@@ -29,7 +29,7 @@ const Main = () => {
           />
 
           <View style={styles.addButtom} >
-              <Newact />
+              <AddActivity />
           </View>
         </View>
     ) 

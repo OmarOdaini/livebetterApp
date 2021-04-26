@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
-import {updateActivity} from '../DBSchemas/activitySchema';
+import {updateActivity} from '../Schemas/activitySchema';
+import {deleteActivity, updateRunningStatus, stopRunningActivites} from '../Schemas/activitySchema'
+
 
 const Stopwatch = (props) => {
     // time state
@@ -25,6 +27,15 @@ const Stopwatch = (props) => {
             }).catch((error) => console.log(error));
         }
     }, [props.isRunning]);
+
+    // Delete and update time in DB
+    useEffect(() => {
+      if(props.delete){
+        deleteActivity({title: props.title, isDeleted: true, isRunning:false, seconds: timeArray[0], minutes: timeArray[1], hours: timeArray[2]}
+          ).catch((error) =>{console.log(error)});
+      }
+    }, [props.delete])
+
     
     // Stopwatch output
     return (
