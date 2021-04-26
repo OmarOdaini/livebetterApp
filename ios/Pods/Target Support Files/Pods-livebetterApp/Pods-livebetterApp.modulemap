@@ -1,0 +1,6 @@
+module Pods_livebetterApp {
+  umbrella header "Pods-livebetterApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

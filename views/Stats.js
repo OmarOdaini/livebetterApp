@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Ripple from 'react-native-material-ripple'
 import PieChart from '../utils/PieChart'
 
-
 const Stats = () => {
   const [selectButton, setButton] = useState(false)         //  pressedHeaderSelection
   
@@ -41,7 +40,7 @@ const Stats = () => {
                   
               </View>
               <View style={ styles.Chart}>
-                <PieChart  data={[{ title: 'App Dev', data: [{time: '1.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]},{ title: 'App Dev', data: [{time: '1.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]},{ title: 'App Dev', data: [{time: '1.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]}]}/>
+                <PieChart  data={[{ title: 'App Dev', data: [{time: '3.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]},{ title: 'App Dev', data: [{time: '1.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]},{ title: 'App Dev', data: [{time: '1.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]}]}/>
               </View>
         </View> 
       : 
@@ -51,7 +50,6 @@ const Stats = () => {
   </View>
   )
 }
-
 
 
 const styles = StyleSheet.create({

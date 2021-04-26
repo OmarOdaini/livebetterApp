@@ -35,7 +35,6 @@ const Stopwatch = (props) => {
           ).catch((error) =>{console.log(error)});
       }
     }, [props.delete])
-
     
     // Stopwatch output
     return (

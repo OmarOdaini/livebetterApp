@@ -7,14 +7,15 @@ const currArchives = async (setArchives) => setArchives(await getAllArchive())
 
 
 const PieChart = props => {
-    const [Archives, setArchives] = useState()  
-    const [DailyFormat, setDailyformat] = useState()                
-              
-    // useEffect(() =>{
+
+  const [Archives, setArchives] = useState()  
+  const [DailyFormat, setDailyformat] = useState()        
+
+      // useEffect(() =>{
     //   currArchives(setArchives).then(setDailyformat(DailyReformat(Archives, "27/7/2020"))) 
     //   console.log(DailyFormat)
     //   },[])
-    
+
   return (      
         <View>
             <VictoryPie
@@ -58,5 +59,5 @@ const PieChart = props => {
 //     return DailyPieData
 // }
 
-export default PieChart
+export default PieChart;
     
