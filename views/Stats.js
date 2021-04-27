@@ -14,7 +14,7 @@ const Stats = () => {
   const [DailyFormat, setDailyformat] = useState()        
 
   useEffect(() =>{
-    currArchives(setArchives).then(setDailyformat(DailyReformat(Archives, "26/4/2021"))) 
+    currArchives(setArchives).then(setDailyformat(DailyReformat(Archives, "27/4/2021"))) 
   },[])
 
   return (
@@ -76,9 +76,6 @@ const DailyReformat = (data, day) =>{
         }
       }
     }
-
-    console.log(DailyPieData);
-
     return DailyPieData;
 }
 
