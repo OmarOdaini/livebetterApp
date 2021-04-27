@@ -8,4 +8,5 @@
 ### 2) stats view: a pie chart that represent your time spending in daily and weekly basis<br />
  <br />
 
-![image](https://user-images.githubusercontent.com/26101260/116278412-78295c00-a754-11eb-919d-8e36ea178589.png)
+![image](https://user-images.githubusercontent.com/26101260/116278988-030a5680-a755-11eb-80fd-479e986e88f2.png)
+
