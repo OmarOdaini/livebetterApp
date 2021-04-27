@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import {StyleSheet, View, Text, Dimensions, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Ripple from 'react-native-material-ripple'
+import {getAllArchive} from '../Schemas/activitiesArchiveSchema'
 import PieChart from '../utils/PieChart'
 
+const currArchives = async (setArchives) => setArchives(await getAllArchive())
+
+
 const Stats = () => {
-  const [selectButton, setButton] = useState(false)         //  pressedHeaderSelection
-  
+  const [selectButton, setButton] = useState(true)         //  pressedHeaderSelection
+  const [Archives, setArchives] = useState()  
+  const [DailyFormat, setDailyformat] = useState()        
+
+  useEffect(() =>{
+    currArchives(setArchives).then(setDailyformat(DailyReformat(Archives, "26/4/2021"))) 
+  },[])
+
   return (
   <View style={styles.container}>  
       <View style={styles.header}>
@@ -28,19 +38,19 @@ const Stats = () => {
       {selectButton ?
         <View  style={styles.body}>          
             <View style={styles.slider}>   
-                  <Ripple style={styles.CounterButton} rippleDuration={800} rippleCentered={true} onpress={() => console.log('dd')}>
+                  <Ripple style={styles.CounterButton} rippleDuration={800} rippleCentered={true}>
                       <Icon style={[{color: 'white'}]} size={30} name={'ios-arrow-back'} />
                     </Ripple>
                   
                   <Text style={styles.Day} >Tuesday 06/12</Text>
 
-                  <Ripple style={styles.CounterButton} rippleDuration={800} rippleCentered={true} onpress={() => console.log('dd')}>
+                  <Ripple style={styles.CounterButton} rippleDuration={800} rippleCentered={true}>
                       <Icon style={[{color: 'white'}]} size={30} name={'ios-arrow-forward'} />
                     </Ripple>
                   
               </View>
               <View style={ styles.Chart}>
-                <PieChart  data={[{ title: 'App Dev', data: [{time: '3.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]},{ title: 'App Dev', data: [{time: '1.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]},{ title: 'App Dev', data: [{time: '1.2', date: '12/03/2014'}, {time: '3', date: '12/04/2014'}]}]}/>
+                <PieChart data={DailyFormat} />
               </View>
         </View> 
       : 
@@ -51,6 +61,26 @@ const Stats = () => {
   )
 }
 
+const DailyReformat = (data, day) =>{
+    var DailyPieData = [];
+    let time = 0.0;
+    if(data){
+      for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < data[i].records.length; j++){
+          if(data[i].records[j].date == day){
+              DailyPieData.push({
+                x: data[i].title + "  " + data[i].records[j].hours  + ':' + data[i].records[j].minutes + " hrs",
+                y: data[i].records[j].hours + data[i].records[j].minutes / 60
+            })
+          }
+        }
+      }
+    }
+
+    console.log(DailyPieData);
+
+    return DailyPieData;
+}
 
 const styles = StyleSheet.create({
   container:{
@@ -71,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   Chart:{
-    flex: 6,
+    flex: 5,
     // backgroundColor: 'green',
   },
   textInHeader:{

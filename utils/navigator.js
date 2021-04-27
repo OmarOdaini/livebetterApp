@@ -18,7 +18,7 @@ function TabNavigator() {
   return (
       <NavigationContainer>
         <Tab.Navigator
-            initialRouteName="main"
+            initialRouteName="Stats"
             tabBarPosition='bottom'
             tabBarOptions={{
                 showIcon: true,
