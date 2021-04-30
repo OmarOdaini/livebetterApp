@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import {StyleSheet, View, Text, Dimensions, TouchableOpacity} from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import Ripple from 'react-native-material-ripple'
-import {getAllArchive} from '../Schemas/activitiesArchiveSchema'
-import PieChart from '../utils/PieChart'
-
-const currArchives = async (setArchives) => setArchives(await getAllArchive())
+import Icon from 'react-native-vector-icons/Ionicons';
+import Ripple from 'react-native-material-ripple';
+import {getAllArchive} from '../Schemas/activitiesArchiveSchema';
+import PieChart from '../utils/PieChart';
+import _ from 'lodash'
 
 
 const Stats = () => {
-  const [selectButton, setButton] = useState(true)         //  pressedHeaderSelection
-  const [Archives, setArchives] = useState()  
-  const [DailyFormat, setDailyformat] = useState()        
+  // get all data in archive
+  const getArchive = async () => setArchives(await getAllArchive());
+  const [selectButton, setButton] = useState(true);
+  const [datesList, setDatesList] = useState([])
+  const [dateSelector, setDateSelector] = useState();
+  const [Archives, setArchives] = useState();
+  const [DailyFormat, setDailyformat] = useState();
 
-  useEffect(() =>{
-    currArchives(setArchives).then(setDailyformat(DailyReformat(Archives, "27/4/2021"))) 
-  },[])
+  useEffect(() => {
+    getArchive();
+    setDatesList(getAllDates(Archives));
+    setDateSelector(datesList.length - 1);
+  }, []);
+
+  useEffect(() => {
+    setDailyformat(DailyReformat(Archives, datesList[dateSelector]));
+  }, [dateSelector]);
 
   return (
   <View style={styles.container}>  
@@ -37,21 +46,22 @@ const Stats = () => {
       
       {selectButton ?
         <View  style={styles.body}>          
-            <View style={styles.slider}>   
-                  <Ripple style={styles.CounterButton} rippleDuration={800} rippleCentered={true}>
-                      <Icon style={[{color: 'white'}]} size={30} name={'ios-arrow-back'} />
-                    </Ripple>
-                  
-                  <Text style={styles.Day} >Tuesday 06/12</Text>
+              <View style={styles.slider}>   
+              
+                      <Ripple onPress={() => setDateSelector(val => {if(val - 1 >= 0) return val - 1; else return val})} style={styles.CounterButton} rippleDuration={800} rippleCentered={true}>
+                          <Icon style={[{color: 'white'}]} size={30} name={'ios-arrow-back'} />
+                        </Ripple>
+                      
+                        <Text style={styles.Day} >{getDay(datesList[dateSelector])} {datesList[dateSelector].match(/^.*(?=\/)/g)}</Text>
+                        
+                      <Ripple onPress={() => setDateSelector(val => {if(val + 1 < datesList.length) return val +1; else return val})}  style={styles.CounterButton} rippleDuration={800} rippleCentered={true}>
+                          <Icon style={[{color: 'white'}]} size={30} name={'ios-arrow-forward'} />
+                        </Ripple>
+                </View>
 
-                  <Ripple style={styles.CounterButton} rippleDuration={800} rippleCentered={true}>
-                      <Icon style={[{color: 'white'}]} size={30} name={'ios-arrow-forward'} />
-                    </Ripple>
-                  
-              </View>
-              <View style={ styles.Chart}>
-                <PieChart data={DailyFormat} />
-              </View>
+                <View style={ styles.Chart}>
+                      <PieChart data={(DailyFormat !== undefined)? DailyFormat.filter(obj => obj!== undefined && obj.y > 0) : DailyFormat} />
+                </View>
         </View> 
       : 
           <View style={styles.body}> 
@@ -61,22 +71,39 @@ const Stats = () => {
   )
 }
 
-const DailyReformat = (data, day) =>{
-    var DailyPieData = [];
-    let time = 0.0;
-    if(data){
-      for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].records.length; j++){
-          if(data[i].records[j].date == day){
-              DailyPieData.push({
-                x: data[i].title + "  " + data[i].records[j].hours  + ':' + data[i].records[j].minutes + " hrs",
-                y: data[i].records[j].hours + data[i].records[j].minutes / 60
-            })
-          }
+const getAllDates = (data) => {
+  const dates = []
+
+  _.forEach(data, (activity) => {
+    _.forEach(activity.records, (dailyRecord) => {
+      if(!dates.includes(dailyRecord.date))
+        dates.push(dailyRecord.date);
+    })
+  })
+  return dates;
+}
+
+const DailyReformat = (data, day) => {
+    const DailyPieData = [];
+
+    // reformat
+    _.forEach(data, (activity) => {
+      _.forEach(activity.records, (dailyRecord) => {
+        if(dailyRecord.date == day){
+            DailyPieData.push({
+              x: activity.title + "  " + dailyRecord.hours  + ':' + dailyRecord.minutes + " hrs",
+              y: dailyRecord.hours + dailyRecord.minutes / 60
+          })
         }
-      }
-    }
+      })
+    })
+
     return DailyPieData;
+}
+
+const getDay = (date) => {
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return days[new Date(date).getDay()];
 }
 
 const styles = StyleSheet.create({

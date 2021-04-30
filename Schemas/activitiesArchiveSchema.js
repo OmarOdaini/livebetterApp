@@ -6,7 +6,7 @@ export const ACTIVITY_ARCHIVE_SCHEMA = 'activities_archive'
 export const ARCHIVE_LIST_SCHEMA = 'archive_list'
 
 const time = new Date()
-const date = time.getDate() + "/" + (time.getMonth() + 1) + "/" + time.getFullYear()
+const date = (time.getMonth() + 1) + "/" + time.getDate() + "/" + time.getFullYear()
 
 export const Activities_archive = {
     name: ACTIVITY_ARCHIVE_SCHEMA,
