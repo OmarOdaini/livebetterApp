@@ -1,6 +1,7 @@
 import Realm from 'realm'
 
 // /Users/omaralodaini/Library/Developer/CoreSimulator/Devices/B1865D92-2C59-4044-8AFE-1B77565BDF86/data/Containers/Data/Application/EDC4E29D-0B8B-47D1-A75C-B4C9A8912C49/Documents
+// filter example: x.filtered('title == $0', title)
 
 // Define schema
 export const ACTIVITY_SCHEMA  = 'Activity'
@@ -32,7 +33,7 @@ export const insertActivity = newActivity => new Promise((resolve, reject) => {
     }).catch((error) => reject(error))
 })
 
-// MainView list current activities nonDeleted
+// main view list current activities nonDeleted
 export const getCurrentActivities = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         let activitiesList = realm.objects(ACTIVITY_SCHEMA).filtered('isDeleted == false')
@@ -40,23 +41,16 @@ export const getCurrentActivities = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error))
 })
 
-// MainView list current activities
-export const getActivities = () =>  new Promise((resolve, reject) => {
+// for creating new activites validation
+export const getActivities = () =>  
+    new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         let activitiesList = realm.objects(ACTIVITY_SCHEMA)
         resolve(activitiesList)
     }).catch((error) => reject(error))
 })
 
-export const getSyncActivities = () =>{ 
-    return new Promise((resolve, reject) => {
-        Realm.open(databaseOptions).then(realm => {
-            let activitiesList = realm.objects(ACTIVITY_SCHEMA)
-            resolve(activitiesList)
-        }).catch((error) => reject(error))
-    })
-}
-
+// when need to switch acts off and switch new one on
 export const getRunningActivities = (activity) => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         let activitiesList = realm.objects(ACTIVITY_SCHEMA).filtered('isRunning == true')
@@ -64,7 +58,7 @@ export const getRunningActivities = (activity) => new Promise((resolve, reject) 
     }).catch((error) => reject(error))
 })
 
-// used for seving time when pausing the stopwatch
+// used for saving time when pausing the stopwatch
 export const updateActivity = activity => new Promise((resolve, reject) => {    
     Realm.open(databaseOptions).then(realm => {        
         realm.write(() => {
@@ -124,15 +118,14 @@ export const deleteActivity = activity => new Promise((resolve, reject) => {
     }).catch((error) => reject(error))
 })
 
-export const deleteActivities = () => new Promise((resolve, reject) => {
+export const removeActivities = () => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         realm.write(()=> {
             let activitiesList = realm.objects(ACTIVITY_SCHEMA)
             realm.delete(activitiesList)        
-            resolve('deleted')    
+            resolve()    
         })
     }).catch((error) => reject(error))
 })
-
 
 export default new Realm(databaseOptions)

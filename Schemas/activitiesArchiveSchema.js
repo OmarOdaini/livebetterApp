@@ -10,9 +10,9 @@ const date = (time.getMonth() + 1) + "/" + time.getDate() + "/" + time.getFullYe
 
 export const Activities_archive = {
     name: ACTIVITY_ARCHIVE_SCHEMA,
+    primaryKey: 'title',
     properties: {
-        date: { type: 'string', default: date },
-        seconds: { type: 'int', default: 0 },
+        title: { type: 'string', default: 'Activity' },
         minutes: { type: 'int', default: 0 },
         hours: { type: 'int', default: 0 }
     }
@@ -20,18 +20,17 @@ export const Activities_archive = {
 
 export const archive_list = {
     name: ARCHIVE_LIST_SCHEMA,
-    primaryKey: 'title',
+    primaryKey: 'date',
     properties: {
-        title: { type: 'string', default: 'Activity' },
+        date: { type: 'string', default: date },
         records: { type: 'list', objectType: ACTIVITY_ARCHIVE_SCHEMA },
     }
 }
+
 const databaseOptions = {
     path: 'local.realm',
     schema: [Activities_archive, archive_list]
 }
-
-
 
 //Functions
 // Get All Archives
@@ -44,32 +43,11 @@ export const getAllArchive = () => {
     })
 }
 
-// Get Archive based on title
-export const getArchive = (title) => {
-    return new Promise((resolve, reject) => {
-        Realm.open(databaseOptions).then(realm => {
-            let activitiesList = realm.objects(ARCHIVE_LIST_SCHEMA).filtered('title == $0', title)
-            resolve(activitiesList)
-        }).catch((error) => reject(error))
-    })
-}
-
 // Insert every activity in archive format
 export const insertArchive = activity => new Promise((resolve, reject) => {
     Realm.open(databaseOptions).then(realm => {
         realm.write(() => {
             realm.create(ARCHIVE_LIST_SCHEMA, activity)
-            resolve()
-        })
-    }).catch((error) => reject(error))
-})
-
-// Update Archive list
-export const updateArchiveRecords = activity => new Promise((resolve, reject) => {
-    Realm.open(databaseOptions).then(realm => {
-        realm.write(() => {
-            let UpdatedActivity = realm.objectForPrimaryKey(ARCHIVE_LIST_SCHEMA, activity.title)
-            UpdatedActivity.records.push({ seconds: activity.seconds, minutes: activity.minutes, hours: activity.hours })
             resolve()
         })
     }).catch((error) => reject(error))
